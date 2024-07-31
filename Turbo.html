@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mailbox</title>
+    <link rel="icon" href="Images/logo.png" type="imange/png">
+
+    <!-- Tailwind link -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Link -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Bootstrap 5 links bundle :-  -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .timeline::after {
+
+            background: #41464B;
+
+            animation: moveline 6s linear forwards;
+        }
+
+        @keyframes moveline {
+            0% {
+                height: 0;
+
+            }
+
+            100% {
+                height: 30rem;
+            }
+        }
+
+        .text-box {
+            z-index: 10;
+        }
+
+        #ReplyBox {
+            display: none;
+        }
+
+        a.dropdown-item:hover {
+            background: #817c7c;
+
+        }
+
+        input[type-text]::placeholder{
+            color: white;
+        }
+    </style>
+</head>
+
+<body class=" bg-[#101113]  h-screen">
+
+    <!-- Container -->
+    <div class="flex h-screen">
+
+        <!-- Sidebar -->
+
+        <div
+            class="w-16  h-screen z-20 fixed bg-[#101113] text-white  flex flex-col border-r-2 border-gray-800 items-center  pt-2 space-y-4">
+
+            <!-- Logo/Icon -->
+
+            <div class=" mt-3"> <img class="rounded-sm w-[3.1rem]" src="Images/logo.png" alt=""></div>
+
+            <div class="flex flex-col mt-auto">
+
+                <!-- Home icon -->
+
+                <div class="mx-auto py-4">
+                    <a href="">
+                        <i class="fa-solid fa-house fa-lg   hover:text-white text-[#636465]">
+
+                        </i>
+                    </a>
+                </div>
+
+                <!-- User icon -->
+                <div class="mx-auto py-4">
+                    <a href="">
+                        <i class="fa-solid fa-user fa-lg  hover:text-white text-[#636465]"></i>
+                    </a>
+                </div>
+
+                <!-- Mail icon -->
+                <div class="mx-auto py-4">
+                    <a href="">
+                        <i class="fa-solid fa-envelope fa-lg  hover:text-white text-[#636465]"></i>
+                    </a>
+                </div>
+
+                <!-- Campaign icon -->
+                <div class="mx-auto py-4">
+                    <a href="">
+                        <i class="fa-solid fa-paper-plane fa-lg  hover:text-white text-[#636465]"></i>
+                    </a>
+                </div>
+
+                <!-- Lead list icon -->
+                <div class="mx-auto py-4">
+                    <a href="">
+                        <i class="fa-solid fa-list fa-lg  hover:text-white text-[#636465]"></i>
+                    </a>
+                </div>
+
+                <!-- Onebox icon -->
+                <div class="mx-auto py-4" id="OneboxBtn">
+                    <a href="">
+                        <i class="fa-solid  fa-inbox fa-lg   text-white"></i>
+                    </a>
+                </div>
+
+                <!-- Analytic icon -->
+                <div class="mx-auto py-4">
+                    <a href="">
+                        <i
+                            class="fa-solid fa-chart-simple fa-flip-horizontal fa-lg  hover:text-white text-[#636465]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-blue-800 flex mt-auto mb-2 justify-center items-center rounded-full w-12 h-12  ">
+                <p class=" font-bold  text-2xl   text-white">S</p>
+            </div>
+
+
+        </div>
+
+        <!-- Main content area with navbar and main div -->
+        <div class="flex flex-col flex-1 m-0  bg-black">
+
+            <!-- Navbar -->
+            <div
+                class="w-full bg-[#1F1F1F] fixed z-10  text-white  border-b-[1px] border-gray-800 p-4 flex items-center">
+                <div class="text-2xl px-14">Mailbox</div>
+            </div>
+
+            <!-- Main content -->
+            <div id="OneBox" class="flex-1 pt-20 z-0 flex pl-16">
+
+                <!-- Left Column -->
+
+                <div class="w-1/4 border-r-[1px] hidden lg:block bg-black  border-gray-800 py-2  px-4">
+                    <div class="flex justify-start items-center">
+                        <div class="flex justify-start items-center">
+                            <p class="text-xl text-[#4285F4] font-medium xl:text-xl md:text-sm">All Inbox(s)
+                            </p>
+                            <i
+                                class="xl:w-4 xl:h-4 text-[#4285F4] justify-start items-center xl:pt-1 md:pt-0 md:text-xs fa-solid fa-angle-down mx-2 md:w-2 md:h-2 "></i>
+                        </div>
+                        <div
+                            class="ml-auto flex bg-[#25262B] items-center justify-center xl:w-9 xl:h-9 rounded-md md:w-6 md:h-6 ">
+                            <i class="fa-solid text-white  fa-rotate-right fa-sm md:text-xs xl:text-xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <p class="text-white xl:text-sm font-bold md:text-xs">25/25 <span
+                                class="pl-2 font-normal text-[#7F7F7F]">Inboxes
+                                selected</span></p>
+                    </div>
+
+                    <div class="relative w-full max-w-md mt-2 flex justify-center">
+                        <input type="text" placeholder="Search"
+                            class="w-full bg-[#23272C]  text-[#FFFFFF33] px-10 py-1  border-[1px]  border-gray-700 rounded-md md:text-sm xl:text-xl">
+                        <button>
+                            <i
+                                class="fa-solid fa-magnifying-glass text-[#FFFFFF33]  absolute left-2 xl:-translate-y-3 md:text-sm xl:text-xl md:-translate-y-[0.6rem] "></i>
+                        </button>
+                    </div>
+
+                    <div class="flex justify-center py-2 border-b-[1px] border-gray-600 items-center">
+                        <div class="flex justify-start py-2 items-center">
+                            <div
+                                class="xl:w-10 xl:h-7 bg-[#222426]  flex justify-center font-bold text-blue-500 items-center rounded-full md:text-xs xl:text-sm md:w-8 md:h-5">
+                                26</div>
+                            <p class="text-white px-2 md:text-xs xl:text-lg">New Replies</p>
+                        </div>
+
+                        <div class="flex ml-auto">
+                            <p class="text-white  md:text-xs xl:text-lg">Newest</p>
+                            <i
+                                class="w-4 h-4 justify-start text-white  items-center fa-solid fa-angle-down mx-2 md:text-xs xl:text-lg "></i>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col border-b-[1px]  py-4 border-gray-600">
+                        <div class="flex justify-start py-1 items-center">
+                            <div
+                                class="flex xl:w-[0.7rem]  xl:h-[0.7rem] rounded-full bg-blue-600 md:w-[0.5rem] md:h-[0.5rem]">
+                            </div>
+                            <p class="text-white   px-2 font-normal md:text-sm  xl:text-xl">Beata@gmail.com</p>
+                            <p class=" text-[#FCFCFC66] font-thin ml-auto md:text-sm xl:text-xl">Mar 7</p>
+                        </div>
+                        <div class="px-5 flex">
+                            <p class="text-[#E1E0E0] mr-auto  md:text-xs xl:text-sm">I've tried alot and.</p>
+                        </div>
+
+                        <div class="flex justify-center items-center space-x-2">
+                            <div
+                                class="flex justify-center bg-[#222426]  items-center my-2 w-28 xl:h-7 space-x-2 md:h-6 rounded-full">
+                                <div style="background:#57E0A6;"
+                                    class="xl:w-3 xl:h-3 md:w-2 md:h-2 xl:border-[2px] md:border-[1px] border-gray-500 rounded-full">
+                                </div>
+                                <p style="color: #57E0A6;" class="md:text-[0.6rem] xl:text-sm">Interested</p>
+                            </div>
+
+                            <div
+                                class="flex space-x-2 bg-[#222426]  justify-center items-center xl:w-44 xl:h-7 py-2 rounded-full md:w-40 md:h-6">
+                                <i class=" text-[#bbbec3] fa-solid xl:text-xs fa-paper-plane md:text-[0.4rem]"></i>
+                                <p class="text-white  md:text-[0.6rem] xl:text-sm">Campaign Name</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col border-b-[1px] py-4 border-gray-600">
+                        <div class="flex justify-start py-1 items-center">
+                            <div
+                                class="flex  xl:w-[0.7rem] xl:h-[0.7rem] rounded-full bg-blue-600 md:w-[0.5rem] md:h-[0.5rem]">
+                            </div>
+                            <p class="text-white  px-2 font-normal md:text-sm xl:text-xl">Sanaya@gmail.com</p>
+                            <p class=" text-[#FCFCFC66] font-thin ml-auto md:text-sm xl:text-xl">Mar 7</p>
+                        </div>
+                        <div class="px-5">
+                            <p class="text-[#E1E0E0] md:text-xs xl:text-sm">I've tried alot and.</p>
+                        </div>
+
+                        <div class="flex justify-center items-center space-x-2">
+                            <div
+                                class="flex bg-[#222426] justify-center items-center  my-2 w-28 xl:h-7 space-x-2 md:h-6 rounded-full">
+                                <div
+                                    class="xl:w-3 bg-[#626FE6] xl:h-3 md:w-2 md:h-2 xl:border-[2px] md:border-[1px] border-gray-500 rounded-full">
+                                </div>
+                                <p class=" text-[#626FE6] md:text-[0.6rem] xl:text-sm">Closed</p>
+                            </div>
+
+                            <div
+                                class="flex space-x-2 bg-[#222426] justify-center items-center xl:w-44 xl:h-7 py-2 rounded-full md:w-40 md:h-6">
+                                <i class="text-[#bbbec3] fa-solid xl:text-xs fa-paper-plane md:text-[0.4rem]"></i>
+                                <p class="text-white  md:text-[0.6rem] xl:text-sm">Campaign Name</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col border-b-[1px] py-4 border-gray-600 ">
+                        <div class="flex justify-start py-1 items-center">
+                            <div
+                                class="flex  xl:w-[0.7rem] xl:h-[0.7rem] rounded-full bg-blue-600 md:w-[0.5rem] md:h-[0.5rem]">
+                            </div>
+                            <p class="text-white px-2 font-normal md:text-sm xl:text-xl">William@gmail.com</p>
+                            <p style="color: #FCFCFC66" class=" font-thin ml-auto md:text-sm xl:text-xl">Mar 7</p>
+                        </div>
+                        <div class="px-5">
+                            <p style="color: #E1E0E0" class="text-white md:text-xs xl:text-sm">Payment not going through
+                            </p>
+                        </div>
+
+                        <div class="flex justify-center items-center space-x-2">
+                            <div style="background:#222426;"
+                                class="flex justify-center items-center my-2 w-28 xl:h-7 space-x-2 md:h-6 rounded-full">
+                                <div style="background:#57E0A6;"
+                                    class="xl:w-3 xl:h-3 md:w-2 md:h-2 xl:border-[2px] md:border-[1px] border-gray-500 rounded-full">
+                                </div>
+                                <p style="color: #57E0A6;" class="md:text-[0.6rem] xl:text-sm">Interested</p>
+                            </div>
+
+                            <div style="background:#222426;"
+                                class="flex space-x-2 justify-center items-center xl:w-44 xl:h-7 py-2 rounded-full md:w-40 md:h-6">
+                                <i class="md:text-[0.4rem] xl:text-xs fa-solid fa-paper-plane "
+                                    style="color: #bbbec3;"></i>
+                                <p class="text-white md:text-[0.6rem] xl:text-sm">Campaign Name</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col border-b-[1px] py-4 border-gray-600">
+                        <div class="flex justify-start py-1 items-center">
+                            <div
+                                class="flex  xl:w-[0.7rem] xl:h-[0.7rem] rounded-full bg-blue-600 md:w-[0.5rem] md:h-[0.5rem]">
+                            </div>
+                            <p class="text-white px-2 font-normal xl:text-xl md:text-sm">Jhonson@gmail.com</p>
+                            <p style="color: #FCFCFC66" class=" font-thin ml-auto xl:text-xl md:text-sm">Mar 7</p>
+                        </div>
+                        <div class="px-5">
+                            <p style="color: #E1E0E0" class="text-white xl:text-sm md:text-xs">Could you tell me more
+                                about it</p>
+                        </div>
+
+                        <div class="flex justify-center items-center space-x-2">
+                            <div style="background:#222426;"
+                                class="flex justify-center items-center my-2 w-36 xl:h-7 space-x-2 rounded-full md:h-6">
+                                <div style="background:#9C62E6;"
+                                    class="xl:w-3 xl:h-3 md:w-2 md:h-2 xl:border-[2px] md:border-[1px] border-gray-500 rounded-full">
+                                </div>
+                                <p style="color: #9C62E6;" class="md:text-[0.6rem] xl:text-sm">Meeting Blocked</p>
+                            </div>
+
+                            <div style="background:#222426;"
+                                class="flex space-x-2 justify-center items-center xl:w-44 xl:h-7 py-2 rounded-full md:w-40 md:h-6">
+                                <i class="md:text-[0.4rem] xl:text-xs fa-solid fa-paper-plane "
+                                    style="color: #bbbec3;"></i>
+                                <p class="text-white md:text-[0.6rem] xl:text-sm">Campaign Name</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div style="border-left-color: #5C7CFA;"
+                        class="flex flex-col border-l-4 pl-1 border-b-[1px] py-4 border-gray-600">
+                        <div class="flex justify-start py-1 items-center">
+                            <div
+                                class="flex  xl:w-[0.7rem] xl:h-[0.7rem] rounded-full bg-blue-600 md:w-[0.5rem] md:h-[0.5rem]">
+                            </div>
+                            <p class="text-white px-2 font-normal xl:text-xl md:text-sm">Orlando@gmail.com</p>
+                            <p style="color: #FCFCFC66" class=" font-thin ml-auto xl:text-xl md:text-sm">Mar 7</p>
+                        </div>
+                        <div class="px-5">
+                            <p style="color: #E1E0E0" class="text-white xl:text-sm md:text-xs">Hi, I am interested</p>
+                        </div>
+
+                        <div class="flex justify-center items-center space-x-2">
+                            <div style="background:#222426;"
+                                class="flex justify-center items-center my-2 w-44 xl:h-7 space-x-2 rounded-full md:h-6">
+                                <div style="background:#E6D162;"
+                                    class="xl:w-3 xl:h-3 md:w-2 md:h-2 xl:border-[2px] md:border-[1px] border-gray-500 rounded-full">
+                                </div>
+                                <p style="color: #E6D162;" class="md:text-[0.6rem] xl:text-sm">Meeting Completed</p>
+                            </div>
+
+                            <div style="background:#222426;"
+                                class="flex space-x-2 justify-center items-center xl:w-44 xl:h-7 py-2 rounded-full md:w-40 md:h-6">
+                                <i class="md:text-[0.4rem] xl:text-xs fa-solid fa-paper-plane "
+                                    style="color: #bbbec3;"></i>
+                                <p class="text-white md:text-[0.6rem] xl:text-sm">Campaign Name</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="flex flex-col border-b-[1px] py-4 border-gray-600">
+                        <div class="flex justify-start py-1 items-center">
+                            <div
+                                class="flex  xl:w-[0.7rem] xl:h-[0.7rem] rounded-full bg-blue-600 md:w-[0.5rem] md:h-[0.5rem]">
+                            </div>
+                            <p class="text-white px-2 font-normal xl:text-xl md:text-sm">William@gmail.com</p>
+                            <p style="color: #FCFCFC66" class=" font-thin ml-auto xl:text-xl md:text-sm">Mar 7</p>
+                        </div>
+                        <div class="px-5">
+                            <p style="color: #E1E0E0" class="text-white xl:text-sm md:text-xs">I've tried alot and.</p>
+                        </div>
+
+                        <div class="flex justify-center items-center space-x-2">
+                            <div style="background:#222426;"
+                                class="flex justify-center items-center my-2 w-28 xl:h-7 space-x-2 rounded-full md:h-6">
+                                <div style="background:#57E0A6;"
+                                    class="xl:w-3 xl:h-3 md:w-2 md:h-2 xl:border-[2px] md:border-[1px] border-gray-500 rounded-full">
+                                </div>
+                                <p style="color: #57E0A6;" class="md:text-[0.6rem] xl:text-sm">Interested</p>
+                            </div>
+
+                            <div style="background:#222426;"
+                                class="flex space-x-2 justify-center items-center xl:w-44 xl:h-7 py-2 rounded-full md:w-40 md:h-6">
+                                <i class="md:text-[0.4rem] xl:text-xs fa-solid fa-paper-plane "
+                                    style="color: #bbbec3;"></i>
+                                <p class="text-white md:text-[0.6rem] xl:text-sm">Campaign Name</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+
+                <!-- Middle Column -->
+                <div class="flex-1 relative bg-black border-x-[1px] px-2 py-2 border-gray-800  hidden lg:block ">
+
+                    <!-- **********Header*********** -->
+                    <div class="flex justify-center items-center px-2 py-2 border-b-[1px] pb-2 border-gray-700">
+                        <div class="inline-flex  flex-col space-y-2">
+                            <input style="color: white;" class="bg-transparent " type="text" id="name"
+                                placeholder="Orlando">
+                            <input class=" bg-transparent" type="email" id="email" placeholder="Orlandom@gmail.com">
+                        </div>
+
+                        <div class=" flex justify-center items-center cursor-pointer space-x-3 ml-auto">
+
+                            <div style="background: #1F1F1F;"
+                                class=" space-x-2 flex justify-center items-center w-52 h-10 rounded-md border-[1px] border-gray-700">
+                                <div style="background: #E6D162;"
+                                    class="w-3 h-3 rounded-full border-[1.5px] border-gray-500"></div>
+                                <p style="color: #D3D7DB;" class="">Meeting Completed</p>
+                                <i class="xl:w-4 xl:h-4 justify-center items-center  md:text-xs xl:text-sm fa-solid fa-angle-down mx-2 md:w-2 md:h-2 "
+                                    style="color: #A9AEB4;"></i>
+                            </div>
+
+                            <div style=" background: #1F1F1F;"
+                                class=" dropdown cursor-pointer space-x-3 flex justify-center items-center w-24 h-10 rounded-md border-[1px] border-gray-700">
+                                <button style="color: #D3D7DB;" class="" data-bs-toggle="dropdown">Move
+
+                                    <i class="xl:w-4 xl:h-4 justify-center items-center xl:text-sm   md:text-xs fa-solid fa-angle-down mx-2 md:w-2 md:h-2 "
+                                        style="color: #A9AEB4;"></i>
+                                </button>
+
+                                <ul class="dropdown-menu   bg-[#343A40]">
+                                    <li><a class="dropdown-item flex  justify-start items-center " href="#">
+                                            <i class="fa-regular fa-folder-closed text-[#EBEBEB]"></i>
+                                            <p class="px-2 text-[#D3D7DB]">Mark as unread</p>
+                                        </a></li>
+                                    <li><a class="dropdown-item flex justify-start items-center " href="#">
+                                            <i class="fa-solid fa-pen text-[#EBEBEB]"></i>
+                                            <p class="px-2  text-[#D3D7DB]">Edit Lead</p>
+                                        </a></li>
+                                    <li><a class="dropdown-item flex justify-start items-center " href="#">
+                                            <i class="fa-solid fa-user-minus text-[#EBEBEB] "></i>
+                                            <p class="px-2   text-[#D3D7DB]">Remove lead</p>
+                                        </a></li>
+                                    <li><a class="dropdown-item flex justify-start items-center" href="#">
+                                            <i class="fa-regular fa-clock text-[#EBEBEB] "></i>
+                                            <p class="px-2   text-[#D3D7DB]">Set reminder</p>
+                                        </a></li>
+                                    <li><a class="dropdown-item flex justify-start items-center " href="#">
+                                            <i class="fa-solid fa-trash text-[#EBEBEB]   "></i>
+                                            <p class="px-2   text-[#D3D7DB]">Delete</p>
+                                        </a></li>
+                                </ul>
+
+                            </div>
+
+
+                            <div style=" background: #1F1F1F;"
+                                class=" dropdown bg-[#343A40] cursor-pointer space-x-2 flex justify-center items-center w-10 h-10 rounded-md border-[1px] border-gray-700">
+                                <button data-bs-toggle="dropdown">
+                                    <i style="color: #A9AEB4;"
+                                        class="fa-solid fa-ellipsis justify-center items-center"></i>
+                                </button>
+                                <ul class="dropdown-menu  bg-[#343A40]">
+                                    <li><a class="dropdown-item flex justify-start items-center " href="#">
+                                            <i class="fa-solid fa-envelope-open-text text-[#EBEBEB]"></i>
+                                            <p class="px-2  text-[#D3D7DB]">Mark as unread</p>
+                                        </a></li>
+                                    <li><a class="dropdown-item flex justify-start items-center " href="#">
+                                            <i class="fa-regular fa-folder  text-[#EBEBEB]"></i>
+
+                                            <p class="px-2  text-[#D3D7DB]">Edit lead</p>
+                                        </a></li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- **************Date & Time Mention***************** -->
+                    <div class="my-2 relative flex justify-center items-center  w-full h-10 ">
+                        <div class="w-full flex items-center h-[0.5px] bg-gray-700"></div>
+                        <div style="background: #171819; color: #FFFFFF;"
+                            class="flex justify-center absolute   items-center w-24 h-7 rounded-md border-[1px] border-gray-700">
+                            21 Feb</div>
+                    </div>
+
+                    <!-- ***************** Mail Box open******************* -->
+
+                    <div style="background: #141517;" class="w-full my-2 rounded-md  max-h-max min-h-48 ">
+                        <!-- **************Details part***************  -->
+                        <div class="flex flex-col  justify-start space-y-2 items-center py-2">
+                            <div class="flex mr-auto px-2 space-x-96">
+                                <input style="color: #F8FAFC;" class="bg-transparent" type="text" id="subject"
+                                    placeholder="New product Launch">
+                                <input style="color: #7F7F7F;" class=" ml-auto bg-transparent"
+                                    placeholder="20 june 2022 : 9:16AM" type="datetime">
+                            </div>
+
+                            <div class="flex mr-auto px-2">
+                                <label style="color: #AEAEAE;" class="pr-2" for="">From:</label>
+                                <input style="color: #AEAEAE;" class="bg-transparent " placeholder="jeanne@icloud.com"
+                                    type="email">
+
+                                <label style="color: #AEAEAE;" class=" pr-2" for="">CC:</label>
+                                <input style="color: #AEAEAE;" class="bg-transparent " placeholder="lennon.j@mail.com"
+                                    type="email" id="">
+                            </div>
+
+
+                            <div class="mr-auto px-2 ">
+                                <label style="color: #AEAEAE;" class="t pr-2" for="">To:</label>
+                                <input style="color: #AEAEAE;" class="bg-transparent" placeholder="lennon.j@mail.com"
+                                    type="email">
+                            </div>
+
+                        </div>
+
+                        <div class=" overflow-hidden mr-auto w-full h-auto py-2 px-2 ">
+                            <p class="text-white">
+                                Hi {FIRST_NAME},<br>
+
+                                I would like to introduce you to SaaSgrow, a productized design service specifically
+                                tailored for saas startups. Our aim is to help you enhance the user experience and boost
+                                the visual appeal of your software products</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="my-2 relative flex justify-center items-center  w-full h-10 ">
+                        <div class="w-full flex items-center h-[0.5px] bg-gray-700"></div>
+                        <div style="background: #171819; color: #FFFFFF;"
+                            class="flex justify-center absolute   items-center w-24 h-7 rounded-md border-[1px] border-gray-700">
+                            Yesterday</div>
+                    </div>
+
+
+
+                    <div style="background: #141517;" class="w-full my-2 rounded-md  max-h-max min-h-48 ">
+                        <!-- **************Details part***************  -->
+                        <div class="flex flex-col  justify-start space-y-2 items-center py-2">
+                            <div class="flex mr-auto px-2 space-x-96">
+                                <input style="color: #F8FAFC;" class="bg-transparent" type="text" id="subject"
+                                    placeholder="Re:New product Launch">
+                                <input style="color: #7F7F7F;" class=" ml-auto bg-transparent"
+                                    placeholder="20 june 2022 : 9:16AM" type="datetime">
+                            </div>
+
+                            <div class="flex mr-auto px-2">
+                                <label style="color: #AEAEAE;" class="pr-2" for="">From:</label>
+                                <input style="color: #AEAEAE;" class="bg-transparent " placeholder="jeanne@icloud.com"
+                                    type="email">
+
+                                <label style="color: #AEAEAE;" class="pr-2" for="">CC:</label>
+                                <input style="color: #AEAEAE;" class="bg-transparent " placeholder="lennon.j@mail.com"
+                                    type="email" id="">
+                            </div>
+
+
+                            <div class="mr-auto px-2 ">
+                                <label style="color: #AEAEAE;" class="pr-2" for="">To:</label>
+                                <input style="color: #AEAEAE;" class="bg-transparent" placeholder="lennon.j@mail.com"
+                                    type="email">
+                            </div>
+
+                        </div>
+
+                        <div class=" overflow-hidden mr-auto w-full h-auto py-2 px-2 ">
+                            <p class="text-white">
+                                Hi {FIRST_NAME},<br>
+
+                                I would like to introduce you to SaaSgrow, a productized design service specifically
+                                tailored for saas startups. Our aim is to help you enhance the user experience and boost
+                                the visual appeal of your software products</p>
+
+                        </div>
+
+                    </div>
+                    <div class="my-2 relative flex justify-center items-center  w-full h-10 ">
+                        <div class="w-full flex items-center h-[0.5px] bg-gray-700"></div>
+                        <div style="background: #171819; color: #FFFFFF;"
+                            class="flex justify-center absolute   items-center w-24 h-7 rounded-md border-[1px] border-gray-700">
+                            Today</div>
+                    </div>
+
+
+
+                    <div style="background: #141517;" class="w-full my-2 rounded-md max-h-max min-h-48 ">
+                        <!-- **************Details part***************  -->
+                        <div class="flex flex-col  justify-start space-y-2 items-center py-2">
+                            <div class="flex mr-auto px-2 space-x-96">
+                                <input style="color: #F8FAFC;" class="bg-transparent " type="text" id="subject"
+                                    placeholder="Re:New product Launch">
+                                <input style="color: #7F7F7F;" class=" ml-auto bg-transparent"
+                                    placeholder="20 june 2022 : 9:16AM" type="datetime">
+                            </div>
+
+                            <div class="flex mr-auto px-2">
+                                <label style="color: #AEAEAE;" class="pr-2" for="">From:</label>
+                                <input style="color: #AEAEAE;" class="bg-transparent " placeholder="jeanne@icloud.com"
+                                    type="email">
+
+                                <label style="color: #AEAEAE;" class="pr-2" for="">CC:</label>
+                                <input style="color: #AEAEAE;" class="bg-transparent " placeholder="lennon.j@mail.com"
+                                    type="email" id="">
+                            </div>
+
+
+                            <div class="mr-auto px-2 ">
+                                <label style="color: #AEAEAE;" class="pr-2" for="">To:</label>
+                                <input style="color: #AEAEAE;" class="bg-transparent" placeholder="lennon.j@mail.com"
+                                    type="email">
+                            </div>
+
+                        </div>
+
+                        <div class=" overflow-hidden mr-auto w-full h-auto py-2 px-2 ">
+                            <p class="text-white">
+                                Hi {FIRST_NAME},<br>
+
+                                I would like to introduce you to SaaSgrow, a productized design service specifically
+                                tailored for saas startups. Our aim is to help you enhance the user experience and boost
+                                the visual appeal of your software products</p>
+
+                        </div>
+
+                    </div>
+
+                    <button style="background: linear-gradient(to left ,#0524BFFC,#4B63DD);"
+                        class=" w-[136px]  h-10 mt-5 space-x-4 rounded-md flex justify-center items-center"
+                        id="ReplyBtn">
+                        <i class="fa-solid fa-reply text-white"></i>
+                        <p class="text-white text-[15px]">Reply</p>
+                    </button>
+
+                    <!-- ***************Reply overlay******************** -->
+                    <div style="background: #141517;"
+                        class=" w-[752px]  h-[543px] rounded-md fixed left-[20%] translate-x-[8.5rem] top-24 z-50 border-[1px] border-gray-700"
+                        id="ReplyBox">
+                        <header style="background: #41464B;"
+                            class="flex justify-center items-center rounded-ss-md rounded-se-md border-b-[1px] border-gray-500">
+                            <div style="color: #BAB9BD;" class="mx-10">Reply</div>
+                            <button class="text-white  flex justify-center items-center ml-auto w-10 h-10"
+                                id="CloseBtn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </header>
+
+                        <div style="color: #BAB9BD;" class="border-b-[1px] border-gray-700 py-2 px-2 space-x-2">
+                            <label for="">From :</label>
+                            <input type="email" class="bg-transparent" placeholder="jeannne@icolud.com">
+                        </div>
+                        <div style="color: #BAB9BD;" class="border-b-[1px] border-gray-700 py-2 px-2 space-x-2">
+                            <label for="">To :</label>
+                            <input type="email" class="bg-transparent" placeholder="peter@gmail.com">
+
+                        </div>
+                        <div style="color: #BAB9BD;" class="border-b-[1px] border-gray-700 py-2 px-2 space-x-2">
+                            <label for="">Subject :</label>
+                            <input type="text" class="bg-transparent" placeholder="Warmup Welcome">
+
+                        </div>
+
+                        <div style="color: #BAB9BD;"
+                            class=" overflow-auto  overflow-y-scroll hide-scrollbar mr-auto w-full h-[300px] my-2 py-2 px-5 ">
+
+                            Hi Jeanne, <br>
+                            I hope this message finds you well.
+
+                            I wanted to follow up on our recent meeting regarding upcoming projects. It was
+                            great to discuss with you, and I appreciate the insights you shared.
+                            If you have any questions or need further clarification on any points, please
+                            feel free to reach out.
+
+                            Thank you again for your time and input. I look forward to our continued collaboration.
+                        </div>
+
+                        <footer class="flex pt-3 px-5 border-t-[1px] border-gray-700">
+                            <button style="background: linear-gradient(to left,#0524BFFC,#4B63DD);"
+                                class="w-28 space-x-2  h-10 rounded-md flex justify-center items-center">
+                                <p class="text-white">Send</p>
+                                <i class="fa-solid fa-caret-down text-white"></i>
+                            </button>
+
+                            <div class="w-28 space-x-2  h-10 rounded-md mx-2 flex justify-center items-center ">
+                                <i class="fa-solid fa-bolt-lightning text-white"></i>
+                                <p class="text-white">Variables</p>
+                            </div>
+
+                            <div class="w-36 space-x-2  h-10 rounded-md mx-2 flex justify-center items-center">
+                                <i class="fa-regular fa-eye text-white"></i>
+                                <p class="text-white">Preview Email</p>
+                            </div>
+
+                            <div class="flex  space-x-5 px-5 justify-end items-center">
+                                <div class="flex">
+                                    <i class="fa-solid fa-a text-white"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical text-white"></i>
+                                </div>
+
+                                <i class="fa-solid fa-paperclip text-white"></i>
+                                <i class="fa-regular fa-image text-white"></i>
+                                <i class="fa-regular fa-face-smile text-white"></i>
+                                <i class="fa-solid fa-user-minus text-white"></i>
+                                <div class="flex space-x-1">
+                                    <i class="fa-solid fa-chevron-left text-white"></i>
+                                    <i class="fa-solid fa-chevron-right text-white"></i>
+                                </div>
+
+                            </div>
+
+                        </footer>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Column -->
+
+                <div class="w-1/4 bg-black border-l-[1px]  border-gray-800 px-1 py-2 hidden lg:block ">
+
+                    <!-- ************Outer div****************** -->
+                    <div class="w-full ">
+                        <!-- ********Lead Details********* -->
+                        <div style="background: #23272C;"
+                            class="flex w-full  justify-center border-[1px] py-1 border-gray-600 rounded-md">
+                            <p class="text-white xl:text-xl md:text-sm">Lead Details</p>
+                        </div>
+
+                        <div class="flex flex-col justify-start items-center pt-2 py-10  ">
+                            <form class="flex flex-col space-y-4" action="">
+                                <div class="flex pt-2">
+                                    <label class="text-white pr-2" for="">Name</label>
+                                    <input style="color: #B9B9B9;" class="ml-auto bg-transparent font-thin" type="text">
+                                </div>
+                                <div class="flex">
+                                    <label class="text-white pr-2" for="">Contact</label>
+                                    <input style="color: #B9B9B9;"
+                                        class="ml-auto bg-transparent font-thin border-gray-600 focus:bg-transparent"
+                                        type="text">
+                                </div>
+                                <div class="flex">
+                                    <label class="text-white pr-2" for="">Email Id</label>
+                                    <input style="color: #B9B9B9;"
+                                        class="ml-auto bg-transparent font-thin border-gray-600 focus:bg-transparent"
+                                        type="email">
+                                </div>
+                                <div class="flex">
+                                    <label class="text-white pr-2" for="">Linkedin</label>
+                                    <input style="color: #B9B9B9;"
+                                        class="ml-auto bg-transparent font-thin border-gray-600 focus:bg-transparent"
+                                        type="text">
+                                </div>
+                                <div class="flex">
+                                    <label class="text-white pr-2" for="">Company Name</label>
+                                    <input style="color: #B9B9B9;"
+                                        class="ml-auto bg-transparent font-thin border-gray-600 focus:bg-transparent"
+                                        type="text">
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- ***********Activities*************** -->
+                        <div style="background: #23272C;"
+                            class="flex w-full  justify-center border-[1px] py-1 border-gray-600 rounded-md">
+                            <p class="text-white xl:text-xl md:text-sm">Activities</p>
+                        </div>
+
+                        <div class="flex flex-col ">
+                            <div>
+                                <p class="text-white py-4 px-4 text-xl">Campaign Name</p>
+                            </div>
+
+                            <div class="flex  justify-start px-4 items-center">
+                                <p class="text-white">8 steps</p>
+                                <div style="background: #403F3F;" class="  w-[1px] h-5 mx-2"></div>
+                                <p class="text-white">9 Days in sequence</p>
+                            </div>
+
+                            <div class="timeline mt-2 relative w-full 
+                         after:absolute after:w-[1px] after:h-[30rem]  after:top-5 after:left-[50%] after:z-0 after:-translate-x-20
+                         ">
+
+                                <div class="flex mx-auto justify-center relative space-x-2 w-52 py-2 items-center ">
+
+                                    <div style=" background: #41464B;"
+                                        class="flex text-box text-box justify-center items-center w-10 h-10  rounded-full">
+                                        <i style="color: #BFBFBF;" class="fa-regular fa-envelope"></i>
+                                    </div>
+
+                                    <div class="relative px-2 py-2 flex flex-col justify-center items-end ">
+                                        <p class="text-white">Step 1: Email</p>
+                                        <div class="flex space-x-2 justify-end items-end pl-5">
+                                            <i style="color: #AEAEAE;" class="fa-solid fa-paper-plane text-sm"></i>
+                                            <p style="color: #B9B9B9;" class="font-thin">Sent <b>3rd, Feb</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex mx-auto justify-center relative space-x-2 w-52 py-2 items-center ">
+
+                                    <div style="background: #41464B;"
+                                        class="flex text-box justify-center items-center w-10 h-10 rounded-full">
+                                        <i style="color: #BFBFBF;" class="fa-regular fa-envelope"></i>
+                                    </div>
+
+                                    <div class="relative px-2 py-2 flex flex-col justify-end items-end ">
+                                        <p class="text-white">Step 2: Email</p>
+                                        <div class="flex space-x-2 justify-center items-center">
+                                            <i style="color: #ECBF21;" class="fa-regular fa-envelope-open text-sm"></i>
+                                            <p style="color: #B9B9B9;" class="font-thin">Opened <b>5th, Feb</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex mx-auto justify-center relative space-x-2 w-52 py-2 items-center ">
+
+                                    <div style="background: #41464B;"
+                                        class="flex text-box justify-center items-center w-10 h-10 rounded-full">
+                                        <i style="color: #BFBFBF;" class="fa-regular fa-envelope"></i>
+                                    </div>
+
+                                    <div class="relative px-2 py-2 flex flex-col justify-end items-end ">
+                                        <p class="text-white">Step 3: Email</p>
+                                        <div class="flex space-x-2 justify-center items-center">
+                                            <i style="color: #ECBF21;" class="fa-regular fa-envelope-open text-sm"></i>
+                                            <p style="color: #B9B9B9;" class="font-thin">Opened <b>5th, Feb</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="flex mx-auto justify-center relative space-x-2 w-52 py-2 items-center ">
+
+                                    <div style="background: #41464B;"
+                                        class="flex text-box justify-center items-center w-10 h-10 rounded-full">
+                                        <i style="color: #BFBFBF;" class="fa-regular fa-envelope"></i>
+                                    </div>
+
+                                    <div class="relative px-2 py-2 flex flex-col justify-center items-end ">
+                                        <p class="text-white">Step 4: Email</p>
+                                        <div class="flex space-x-2 justify-end items-end pl-5">
+                                            <i style="color: #AEAEAE;" class="fa-solid fa-paper-plane text-sm"></i>
+                                            <p style="color: #B9B9B9;" class="font-thin">Sent <b>7th, Feb</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex mx-auto justify-center relative space-x-2 w-52 py-2 items-center ">
+
+                                    <div style="background: #41464B;"
+                                        class="flex text-box justify-center items-center w-10 h-10 rounded-full">
+                                        <i style="color: #BFBFBF;" class="fa-regular fa-envelope"></i>
+                                    </div>
+
+                                    <div class="relative px-2 py-2 flex flex-col justify-end items-end ">
+                                        <p class="text-white">Step 5: Email</p>
+                                        <div class="flex space-x-2 justify-center items-center">
+                                            <i style="color: #ECBF21;" class="fa-regular fa-envelope-open text-sm"></i>
+                                            <p style="color: #B9B9B9;" class="font-thin">Opened <b>8th, Feb</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex mx-auto justify-center relative space-x-2 w-52 py-2 items-center ">
+
+                                    <div style="background: #41464B;"
+                                        class="flex text-box justify-center items-center w-10 h-10 rounded-full">
+                                        <i style="color: #BFBFBF;" class="fa-regular fa-envelope"></i>
+                                    </div>
+
+                                    <div class="relative px-2 py-2 flex flex-col justify-end items-end ">
+                                        <p class="text-white">Step 6: Email</p>
+                                        <div class="flex space-x-2 justify-center items-center">
+                                            <i style="color: #ECBF21;" class="fa-regular fa-envelope-open text-sm"></i>
+                                            <p style="color: #B9B9B9;" class="font-thin">Opened <b>9th, Feb</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex mx-auto justify-center relative space-x-2 w-52 py-2 items-center ">
+
+                                    <div style="background: #41464B;"
+                                        class="flex text-box justify-center items-center w-10 h-10 rounded-full">
+                                        <i style="color: #BFBFBF;" class="fa-regular fa-envelope"></i>
+                                    </div>
+
+                                    <div class="relative px-2 py-2 flex flex-col justify-end items-end ">
+                                        <p class="text-white">Step 7: Email</p>
+                                        <div class="flex space-x-2 justify-center items-center">
+                                            <i style="color: #ECBF21;" class="fa-solid fa-paper-plane text-xs"></i>
+                                            <p style="color: #B9B9B9;" class="font-thin">Opened <b>9th, Feb</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <!-- *****************Main content********************** -->
+                <div class=" flex-1 block lg:hidden  flex h-full  justify-center items-center" id="home">
+
+                    <!-- *************Home page************** -->
+
+                    <div class="flex  flex-col justify-center items-center text-white">
+                        <img class="h-56 w-64" src="Images/home-content.png" alt="">
+
+                        <p class="text-3xl py-4">Your Email Revolution Starts Here</p>
+                        <p class="font-thin text-xl text-center">When you have inbound E-mails <br> you'll see them here
+                        </p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script>
+        const Reply_Btn = document.getElementById("ReplyBtn");
+        const Reply_Box = document.getElementById("ReplyBox");
+        const Close_Btn = document.getElementById("CloseBtn");
+        const Onebox_Btn = document.getElementById("OneboxBtn");
+        const One_Box = document.getElementById("OneBox");
+
+
+        Reply_Btn.addEventListener('click', () => {
+            Reply_Box.style.display = 'block';
+        });
+
+        Close_Btn.addEventListener('click', () => {
+            Reply_Box.style.display = 'none';
+        });
+
+
+
+    </script>
+</body>
+
+</html>

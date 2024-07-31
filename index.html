@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Login</title>
+    <link rel="icon" href="Images/logo.png" type="imange/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-black">
+    <!-- ***************Navbar****************** -->
+    <nav class="bg-black p-2 flex justify-center border-b-2 border-gray-900">
+        <!-- *************Brand**************** -->
+        <div class=" flex w-12 h-12 p-1 space-x-2 justify-center items-center ">
+            <img class="rounded-sm"
+                src="Images/logo.png"
+                alt="">
+            <p class="text-white text-3xl">Turbo</p>
+        </div>
+    </nav>
+
+    <!-- ****************Login box***************** -->
+    <div class=" flex relative justify-center h-[90vh] items-center">
+        <div style="background-color: #111214;"
+            class=" absolute top-auto text-white border-2 border-gray-800 w-[460px] h-[312px] flex flex-col rounded-xl  text-center">
+            <div class="">
+                <div class="text-xl m-8"> Create a new account</div>
+                <div class="p-2 mx-8 rounded-md border-2 border-gray-700">
+                    <a class="flex justify-center">
+                        <img class="w-6 h-6 mx-2" src="Images/google-icon.png" alt="">
+                        <button id="googleBtn">Sign Up with Google</button>
+
+                    </a>
+                </div>
+                <button style="background: linear-gradient(to left,#0524BFFC,#4B63DD);"
+                 id="CreateNew"   class="p-2  mt-10 rounded-md w-48 ">Create Account</button>
+                <div class="mt-6 font-light text-gray-300"><span class="text-gray-400 font-thin"> Already have an
+                        account ?</span> Sign in</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const Google_Btn = document.getElementById('googleBtn');
+        const CreateNew_Btn = document.getElementById('CreateNew');
+
+        Google_Btn.addEventListener('click', () => {
+            window.location.href = 'Turbo.html'; 
+        });
+        CreateNew_Btn.addEventListener('click', () => {
+            window.location.href = 'Turbo.html'; 
+        });
+    </script>
+
+</body>
+
+</html>
